@@ -1,12 +1,16 @@
-import { Container, Typography, Box, Grid, Paper } from '@mui/material';
+import { Container, Typography, Box, Grid, Paper, Button } from '@mui/material';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import PaidIcon from '@mui/icons-material/Paid';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import SecurityIcon from '@mui/icons-material/Security';
 import AnalyticsIcon from '@mui/icons-material/Analytics';
 import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { useState } from 'react';
+import InvestmentCalculator from './InvestmentCalculator';
 
 function FinancingFlow() {
+  const [calculatorOpen, setCalculatorOpen] = useState(false);
+
   const investorFlowSteps = [
     {
       title: 'Investment Opportunity',
@@ -63,31 +67,49 @@ function FinancingFlow() {
       }}
     >
       <Container maxWidth={false} sx={{ maxWidth: '2000px' }}>
-        <Typography 
-          variant="h2" 
-          align="center"
-          sx={{
-            fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
-            fontWeight: 800,
-            mb: 2,
-            color: 'white'
-          }}
-        >
-          Investor Financing Flow
-        </Typography>
+        <Box sx={{ textAlign: 'center', mb: 8 }}>
+          <Typography 
+            variant="h2" 
+            sx={{
+              fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' },
+              fontWeight: 800,
+              mb: 2,
+              color: 'white'
+            }}
+          >
+            Invest with WareFlow
+          </Typography>
 
-        <Typography 
-          variant="h5" 
-          align="center"
-          sx={{
-            mb: 8,
-            color: 'rgba(255, 255, 255, 0.9)',
-            maxWidth: '800px',
-            mx: 'auto'
-          }}
-        >
-          Join our network of investors and earn competitive returns through invoice financing
-        </Typography>
+          <Typography 
+            variant="h5" 
+            sx={{
+              mb: 4,
+              color: 'rgba(255, 255, 255, 0.9)',
+              maxWidth: '800px',
+              mx: 'auto'
+            }}
+          >
+            Join our network of investors and earn competitive returns through invoice financing
+          </Typography>
+
+          <Button
+            variant="contained"
+            size="large"
+            onClick={() => setCalculatorOpen(true)}
+            sx={{
+              bgcolor: '#2E7D32',
+              color: 'white',
+              px: 4,
+              py: 1.5,
+              fontSize: '1.1rem',
+              '&:hover': {
+                bgcolor: '#1B5E20'
+              }
+            }}
+          >
+            Calculate Your Returns
+          </Button>
+        </Box>
 
         <Grid container spacing={4}>
           {investorFlowSteps.map((step, index) => (
@@ -182,6 +204,11 @@ function FinancingFlow() {
             </Grid>
           ))}
         </Grid>
+
+        <InvestmentCalculator 
+          open={calculatorOpen}
+          onClose={() => setCalculatorOpen(false)}
+        />
       </Container>
     </Box>
   );
